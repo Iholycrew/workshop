@@ -11,19 +11,19 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd workshop && npm install && npm run test'
+        sh 'npm install && npm run test'
       }
       post {
         always {
-          junit 'workshop/test-reports/*.xml'
+          junit 'test-reports/*.xml'
         }
       }
     }
     stage('Package') {
       steps {
         script {
-          sh 'cd workshop && rm *.tgz'
-          sh 'cd workshop && npm pack'
+          sh 'rm *.tgz'
+          sh 'npm pack'
         }
       }
     }
